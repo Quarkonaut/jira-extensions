@@ -15,7 +15,6 @@ import { copyTextToClipboard } from './util'
 import { shortenText } from './util'
 
 (function() {
-    'use strict';
 
     var summaryTimer;
     var commitMessageButtonTimer;
@@ -68,10 +67,10 @@ import { shortenText } from './util'
 
     function fixTableSize() {
         var source = <HTMLElement> document.querySelector("#tempo-table > div > #issuetable > thead > tr:nth-child(2) > th.left.colHeaderLink.headerrow-summary.padding");
-        var destination = <HTMLElement> document.querySelector("#stalker > div > div.content-container.tt-content-container > div > div > #issuetable > thead > tr:nth-child(2) > th.left.colHeaderLink.headerrow-summary.padding");
+        var destination = <HTMLTableCellElement> document.querySelector("#stalker > div > div.content-container.tt-content-container > div > div > #issuetable > thead > tr:nth-child(2) > th.left.colHeaderLink.headerrow-summary.padding");
 
         if(destination != null && source != null) {
-            destination.width = source.offsetWidth - 8;
+            destination.width = (source.offsetWidth - 8).toString();
         }
     }
 
@@ -80,14 +79,14 @@ import { shortenText } from './util'
         var summaries = document.getElementsByClassName("summary");
         for (var i = 0; i < summaries.length; i++) {
             var summary = summaries[i];
-            var parentLink = summary.getElementsByClassName("parentIssue")[0];
+            var parentLink = <HTMLElement> summary.getElementsByClassName("parentIssue")[0];
             if (parentLink)
             {
-                if (!parentLink.name)
+                if (!parentLink.dataset['issue-number'])
                 {
-                    parentLink.name = parentLink.innerText;
+                    parentLink.dataset['issue-number'] = parentLink.innerText;
                 }
-                parentLink.innerText = parentLink.name + ": " + shortenText(parentLink.title, 80);
+                parentLink.innerText = parentLink.dataset['issue-number'] + ": " + shortenText(parentLink.title, 80);
             }
         }
 
@@ -99,6 +98,7 @@ import { shortenText } from './util'
 
         return;
     }
+
     // I don't know of a better way of dealing with the ajax than to check every second until
     // we find the elements we want.
     GM_log("Timer starting.");

@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var util_1 = require("./util");
 var util_2 = require("./util");
 (function () {
-    'use strict';
     var summaryTimer;
     var commitMessageButtonTimer;
     function addCopyCommitMessageHeaderButton() {
@@ -57,7 +56,7 @@ var util_2 = require("./util");
         var source = document.querySelector("#tempo-table > div > #issuetable > thead > tr:nth-child(2) > th.left.colHeaderLink.headerrow-summary.padding");
         var destination = document.querySelector("#stalker > div > div.content-container.tt-content-container > div > div > #issuetable > thead > tr:nth-child(2) > th.left.colHeaderLink.headerrow-summary.padding");
         if (destination != null && source != null) {
-            destination.width = source.offsetWidth - 8;
+            destination.width = (source.offsetWidth - 8).toString();
         }
     }
     function expandSummaries() {
@@ -66,10 +65,10 @@ var util_2 = require("./util");
             var summary = summaries[i];
             var parentLink = summary.getElementsByClassName("parentIssue")[0];
             if (parentLink) {
-                if (!parentLink.name) {
-                    parentLink.name = parentLink.innerText;
+                if (!parentLink.dataset['issue-number']) {
+                    parentLink.dataset['issue-number'] = parentLink.innerText;
                 }
-                parentLink.innerText = parentLink.name + ": " + util_2.shortenText(parentLink.title, 80);
+                parentLink.innerText = parentLink.dataset['issue-number'] + ": " + util_2.shortenText(parentLink.title, 80);
             }
         }
         if (summaries.length > 0) {
