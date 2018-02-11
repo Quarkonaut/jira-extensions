@@ -115,10 +115,10 @@
             var summary = summaries[i];
             var parentLink = summary.getElementsByClassName("parentIssue")[0];
             if (parentLink) {
-                if (!parentLink.dataset['issue-number']) {
-                    parentLink.dataset['issue-number'] = parentLink.innerText;
+                if (!parentLink.dataset['issueNumber']) {
+                    parentLink.dataset['issueNumber'] = parentLink.innerText;
                 }
-                parentLink.innerText = parentLink.dataset['issue-number'] + ": " + shortenText(parentLink.title, 80);
+                parentLink.innerText = parentLink.dataset['issueNumber'] + ": " + shortenText(parentLink.title, 80);
             }
         }
         if (summaries.length > 0) {

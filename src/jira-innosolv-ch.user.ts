@@ -144,11 +144,11 @@
             var parentLink = <HTMLElement> summary.getElementsByClassName("parentIssue")[0];
             if (parentLink)
             {
-                if (!parentLink.dataset['issue-number'])
+                if (!parentLink.dataset['issueNumber'])
                 {
-                    parentLink.dataset['issue-number'] = parentLink.innerText;
+                    parentLink.dataset['issueNumber'] = parentLink.innerText;
                 }
-                parentLink.innerText = parentLink.dataset['issue-number'] + ": " + shortenText(parentLink.title, 80);
+                parentLink.innerText = parentLink.dataset['issueNumber'] + ": " + shortenText(parentLink.title, 80);
             }
         }
 
