@@ -7,12 +7,12 @@
 // @icon        https://fuse314.github.io/ico/jira-extensions.png
 // @author      Daniel Dähler, Maurus Kühne, Gottfried Mayer
 // @include     https://jira.innosolv.ch/*
+// @require     util.js
 // @grant       GM_log
 // @run-at      document-idle
 // ==/UserScript==
 
-import { copyTextToClipboard } from './util'
-import { shortenText } from './util'
+import * as util from './util'
 
 (function() {
 
@@ -59,7 +59,7 @@ import { shortenText } from './util'
                 taskText = document.getElementById("summary-val").innerText;
             }
 
-            copyTextToClipboard(taskNr + ": " + taskText);
+            util.copyTextToClipboard(taskNr + ": " + taskText);
         };
 
         source.appendChild(newBtn);
@@ -86,7 +86,7 @@ import { shortenText } from './util'
                 {
                     parentLink.dataset['issue-number'] = parentLink.innerText;
                 }
-                parentLink.innerText = parentLink.dataset['issue-number'] + ": " + shortenText(parentLink.title, 80);
+                parentLink.innerText = parentLink.dataset['issue-number'] + ": " + util.shortenText(parentLink.title, 80);
             }
         }
 
